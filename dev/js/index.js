@@ -7,6 +7,7 @@ import './../scss/index.scss';
 import {Provider} from 'react-redux';
 import App from './components/app';
 
+
 render(
 	<Provider>
 		<App />
