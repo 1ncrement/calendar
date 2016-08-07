@@ -4,14 +4,31 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import Calendar from './../containers/calendar'
+import moment from 'moment'
+
+const LOCAL = {
+	monthNames: ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
+	dayNames: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+};
+
+var TASKMENAGER = {
+	data:{
+		tasks: []
+	}
+};
 
 class App extends Component{
 	render(){
-		console.log(this.props);
-		return(
-			<div>
-				<h1>Hello</h1>
-			</div>
+		let date = moment();
+		return (
+			<Calendar
+				url='/taskList'
+				date={date}
+				selected={date}
+				localization={LOCAL}
+				taskMenager={TASKMENAGER}
+			/>
 		)
 	}
 }

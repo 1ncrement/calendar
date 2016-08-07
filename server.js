@@ -17,6 +17,29 @@ app.use(webpackHotMiddleware(compiler));
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/index.html')
 });
+app.get('/taskList', function (req, res) {
+	res.send(JSON.stringify({
+		"tasks": [
+			{
+				"name": "Задача 2",
+				"date": "2016-08-13",
+				"time": "15:00:00",
+				"category": "cat1",
+				"VIP": true
+			},
+			{
+				"name": "Задача 1",
+				"date": "2016-08-17",
+				"time": "4:00:00",
+				"category": "cat2",
+				"VIP": true
+			}
+		]
+	}));
+});
+app.get('/addedTask', function (req, res) {
+	res.send('не реализовано');
+});
 
 app.listen(PORT, function (error) {
 	if(error){

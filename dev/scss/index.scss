@@ -1,7 +1,144 @@
-body{
-  color: #999;
-  padding-top: 20px;
+body {
+  background-color: #f9f9f9;
+  color: #555;
 }
-h1{
-  color: red;
+
+$calendar-width: 340px;
+$padding: 10px;
+
+#root {
+  position: relative;
 }
+
+.container {
+  width: $calendar-width;
+  margin: 0 auto;
+
+  .calendar {
+    width: 100%;
+    padding-top: 120px;
+
+    .control {
+      width: 100%;
+
+      [class^='btn'] {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      span {
+        margin-left: $padding;
+        margin-right: $padding;
+        display: inline-block;
+      }
+
+      tr.nameDays {
+        background-color: #bbb;
+      }
+    }
+
+    .calendar-body {
+      width: 100%;
+      tr.week {
+        td {
+          text-align: center;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        td.different-month {
+          color: #cccccc;
+        }
+        td.today {
+          color: white;
+          background-color: #94e6ff;
+        }
+        td.selected {
+          color: white;
+          background-color: #5faaff;
+        }
+      }
+    }
+  }
+
+  .todoList {
+
+    .todoAddedTask {
+      background-color: #b0f0ff;
+      border: 1px solid #ffffff;
+      border-radius: 3px;
+      padding: 3px 5px;
+      vertical-align: middle;
+      cursor: pointer;
+      float: right;
+      transition: all .2s linear;
+      user-select: none;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &:active,
+      &:focus {
+        transform: scale(.98);
+      }
+    }
+
+    .taskList {
+      padding: 0;
+      list-style: none;
+
+      li.task {
+        .taskTime {
+          float: right;
+          font-size: .8em;
+        }
+      }
+
+      li.taskVip {
+        background-color: #ffdfc3;
+        border: 1px solid #cccccc;
+        padding: 3px 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      li {
+        background-color: #fff;
+        border: 1px solid #cccccc;
+        padding: 3px 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      li.taskEmpty {
+        border: none;
+        background: none;
+      }
+    }
+
+    .todoAddedTaskForm {
+      position: absolute;
+      top: -120px;
+      width: $calendar-width;
+      background-color: rgba(120, 120, 120, 0.79);
+      border-radius: 4px;
+      padding: 20px 20px;
+      transition: top .4s ease-in-out;
+
+      &.show {
+        top: 20px;
+      }
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
