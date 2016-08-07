@@ -9,10 +9,9 @@ import Todotask from './../todo'
 export default class Calendar extends Component {
 	constructor(props){
 		super(props);
-		this.state = {
-			params: this.props,
-			jeka: []
-		};
+		this.state = this.props;
+
+		window.props = props;//for dev =P
 	}
 
 	render(){
@@ -24,7 +23,7 @@ export default class Calendar extends Component {
 							className="btnPrev"
 							onClick={this.prevMonth.bind(this)}
 						>{'<'}</th>
-						<th className="monthName" colSpan="5">{this.getTitleMonthName(this.state.params.date.month())}</th>
+						<th className="monthName" colSpan="5">{this.getTitleMonthName(this.state.date.month())}</th>
 						<th
 							className="btnNext"
 							onClick={this.nextMonth.bind(this)}
@@ -39,7 +38,6 @@ export default class Calendar extends Component {
 				</tbody>
 			);
 
-		console.log('render again');
 		return(
 			<div className="container">
 				<table className="calendar">
@@ -47,22 +45,22 @@ export default class Calendar extends Component {
 					{table}
 				</table>
 				<Todotask
-					url={this.state.params.url}
-					selected={this.state.params.selected}
-					taskMenager={this.state.jeka}
+					url={this.state.url}
+					selected={this.state.selected}
+					taskMenager={this.state.taskMenager}
 				/>
 			</div>
 		)
 	}
 
 	getTitleMonthName(month){
-		return this.state.params.localization.monthNames[month]
+		return this.state.localization.monthNames[month]
 	}
 
 	renderHeatNameDays(){
 		return(
 			<tr className="nameDays">
-				{this.state.params.localization.dayNames.map((name)=>{return (<th key={name.toString()}>{name}</th>)})}
+				{this.state.localization.dayNames.map((name)=>{return (<th key={name.toString()}>{name}</th>)})}
 			</tr>
 		)
 	}
@@ -70,7 +68,7 @@ export default class Calendar extends Component {
 	renderWeeks(){
 		let week = [],
 			done = false,
-			date = this.state.params.date.clone().startOf('month').startOf('isoWeek'),
+			date = this.state.date.clone().startOf('month').startOf('isoWeek'),
 			monthIndex = date.month(),
 			count = 0;
 
@@ -79,9 +77,9 @@ export default class Calendar extends Component {
 				<Week
 					key={date.toString()}
 					date={date.clone()}
-					month={this.state.params.date.month()}
+					month={this.state.date.month()}
 				   select={this.selectDay.bind(this)}
-				   selected={this.state.params.selected}
+				   selected={this.state.selected}
 				/>
 			);
 			date.add(1, 'w');
@@ -93,13 +91,13 @@ export default class Calendar extends Component {
 	}
 
 	nextMonth(){
-		let date = this.state.params.date;
+		let date = this.state.date;
 		date.add(1, 'M');
 		this.setState({date});
 	}
 
 	prevMonth(){
-		let date = this.state.params.date;
+		let date = this.state.date;
 		date.add(-1, 'M');
 		this.setState({date});
 	}
@@ -110,20 +108,20 @@ export default class Calendar extends Component {
 		});
 	}
 
-	componentDidMount(){
+/*	componentWillMount(){
 		fetch(this.props.url)
 			.then((res)=> {
 				return res.json()
 			})
 			.then((data)=> {
-				console.log('data ==>',data.tasks);
 				this.setState({
-					jeka: data.tasks
+					taskMenager: {
+						data
+					}
 				});
-				console.log(this.state);
 
 				return data;
 			})
 			.catch((error) => console.error('Error ==> ', error));
-	}
+	}*/
 }

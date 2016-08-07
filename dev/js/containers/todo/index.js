@@ -8,20 +8,16 @@ import AddedTask from './added-form'
 export default class Todotask extends Component {
 	constructor(props){
 		super(props);
-		this.state = {
-			params: this.props
-		};
-		console.log('tasks ==> ',this.props);
+		this.state = props;
 	}
 
 	render(){
-		console.log('selected2 ==> ',this.state);
 		var tasks;
-		if(this.state.params.taskMenager && this.state.params.taskMenager.length == 0){
+		if(this.state.taskMenager.data && this.state.taskMenager.data.tasks.length == 0){
 			tasks = <span>Произошел какой-то збой, надо потанцевать с бубном.</span>
 		}else{
 			let selected = this.props.selected;
-			tasks = this.state.params.taskMenager.map((el)=> {
+			tasks = this.state.taskMenager.data.tasks.map((el)=> {
 				let res = selected.isSame(el.date, 'day') ? (
 					<li
 						key={`${el.date}`}
@@ -51,7 +47,7 @@ export default class Todotask extends Component {
 		console.log('click clack');
 	}
 
-/*	componentWillMount(){
+	componentWillMount(){
 		fetch(this.props.url)
 			.then((res)=> {
 				return res.json()
@@ -67,5 +63,5 @@ export default class Todotask extends Component {
 				return data;
 			})
 			.catch((error) => console.error('Error ==> ', error));
-	}*/
+	}
 }
