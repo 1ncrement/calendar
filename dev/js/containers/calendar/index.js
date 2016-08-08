@@ -10,8 +10,6 @@ export default class Calendar extends Component {
 	constructor(props){
 		super(props);
 		this.state = this.props;
-
-		window.props = props;//for dev =P
 	}
 
 	render(){

@@ -18,6 +18,10 @@ export default class Week extends Component {
 				isToday: date.isSame(new Date(), 'day')
 			};
 
+			/**
+			 * @todo реализовать дополнительное выделение после прихода запроса с тасками,
+			 * если для дня есть таск добавлять ему класс
+			 * */
 			days.push(
 				<td
 					key={day.date.toString()}

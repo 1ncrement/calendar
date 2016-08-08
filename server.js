@@ -21,10 +21,31 @@ app.get('/taskList', function (req, res) {
 	res.send(JSON.stringify({
 		"tasks": [
 			{
-				"name": "Задача 2",
+				"name": "Задача 1",
 				"date": "2016-08-13",
 				"time": "15:00:00",
 				"category": "cat1",
+				"VIP": true
+			},
+			{
+				"name": "Задача 2",
+				"date": "2016-08-13",
+				"time": "16:00:00",
+				"category": "cat1",
+				"VIP": false
+			},
+			{
+				"name": "Задача 3",
+				"date": "2016-08-13",
+				"time": "17:00:00",
+				"category": "cat2",
+				"VIP": false
+			},
+			{
+				"name": "Задача 4",
+				"date": "2016-08-13",
+				"time": "18:00:00",
+				"category": "cat2",
 				"VIP": true
 			},
 			{
