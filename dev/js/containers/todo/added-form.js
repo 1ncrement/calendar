@@ -3,6 +3,7 @@
  */
 import React, {Component} from 'react'
 import moment from 'moment'
+import 'whatwg-fetch'
 
 export default class AddedTask extends Component {
 	constructor(props){
@@ -11,26 +12,40 @@ export default class AddedTask extends Component {
 	}
 
 	render(){
+		let flagShow;
+		if(this.refs.AddedTask){
+			flagShow = this.refs.AddedTask.classList.contains('show');
+		}
 		return(
 			/**
-			 * @todo реализовать показ формы по клику
+			 * @todo добавить функционал добавления новости
 			 * */
-			<form ref="AddedTask" action="" className="todoAddedTaskForm show">
-				<input type="text" name="task-name" placeholder="введите имя задачи" />
-				<input type="text" name="task-date" placeholder="выберите дату" />
-				<input type="text" name="task-time" placeholder="введите время" />
-				<select name="task-category">
-					<option value="cat1">cat1</option>
-					<option value="cat2">cat2</option>
-				</select>
-				<input type="checkbox" name="task-vip" />
-				<button onClick={this.submitBtn} type="submit">Submit</button>
-			</form>
+			<span>
+				<form ref="AddedTask" action="/add" className="todoAddedTaskForm">
+					<input type="text" name="name" placeholder="введите имя задачи" value="task" />
+					<input type="text" name="date" placeholder="выберите дату" value="2016-08-23" />
+					<input type="text" name="time" placeholder="введите время" value="16:00:00" />
+					<input type="text" name="category" placeholder="введите фильтр" value="cat0" />
+					<input type="checkbox" name="vip" />
+					<button onClick={this.submitBtn.bind(this)} type="submit">Submit</button>
+				</form>
+				<span className="todoAddedTask" onClick={this.todoAddedTask.bind(this)}>
+					{this.state.showed ? 'Hide' : 'Show'}
+				</span>
+			</span>
 		)
 	}
 
 	submitBtn(e){
 		e.preventDefault();
 		console.info('submit form');
+	}
+
+	todoAddedTask(){
+		this.setState({
+			showed: !this.state.showed
+		});
+
+		this.refs.AddedTask.classList.toggle('show');
 	}
 }

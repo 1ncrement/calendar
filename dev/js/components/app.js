@@ -13,9 +13,7 @@ const LOCAL = {
 };
 
 var TASKMENAGER = {
-	data:{
-		tasks: []
-	}
+	data:[]
 };
 
 class App extends Component{

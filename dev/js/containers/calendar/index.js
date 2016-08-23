@@ -21,7 +21,10 @@ export default class Calendar extends Component {
 							className="btnPrev"
 							onClick={this.prevMonth.bind(this)}
 						>{'<'}</th>
-						<th className="monthName" colSpan="5">{this.getTitleMonthName(this.state.date.month())}</th>
+						<th className="monthName"
+						    colSpan="5">
+							{this.getTitleMonthName(this.state.date.month())}
+						</th>
 						<th
 							className="btnNext"
 							onClick={this.nextMonth.bind(this)}

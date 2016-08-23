@@ -13,11 +13,11 @@ export default class Todotask extends Component {
 
 	render(){
 		var tasks;
-		if(this.state.taskMenager.data && this.state.taskMenager.data.tasks.length == 0){
+		if(this.state.taskMenager.data && this.state.taskMenager.data.length == 0){
 			tasks = <span>Произошел какой-то збой, надо потанцевать с бубном.</span>
 		}else{
 			let selected = this.props.selected;
-			tasks = this.state.taskMenager.data.tasks.map((el)=> {
+			tasks = this.state.taskMenager.data.map((el)=> {
 				var res;
 
 				if(
@@ -51,7 +51,9 @@ export default class Todotask extends Component {
 
 		return(
 			<div className="todoList">
-				<p>Selected: {this.props.selected.date()} <span className="todoAddedTask" onClick={this.todoAddedTask}>Added</span></p>
+				<p>Selected: {this.props.selected.date()}
+					<AddedTask />
+				</p>
 				<p>List:</p>
 				<div className="todoFilter">
 					Filters:{' '}
@@ -77,7 +79,6 @@ export default class Todotask extends Component {
 				<ul className="taskList">
 					{tasks}
 				</ul>
-				<AddedTask />
 			</div>
 		)
 	}
@@ -96,10 +97,6 @@ export default class Todotask extends Component {
 		console.log('change todo Vip');
 	}
 
-	todoAddedTask(){
-		console.log('click clack');
-	}
-
 	componentWillMount(){
 		this.setState({
 			category: [],
@@ -114,7 +111,7 @@ export default class Todotask extends Component {
 			})
 			.then((data)=> {
 				let objfilter = {},
-					categoryFilter = data.tasks.map((el)=>objfilter[el.category] = el.category),
+					categoryFilter = data.map((el)=>objfilter[el.category] = el.category),
 					newCategoryFilter = [];
 
 				for(let prop in objfilter){
